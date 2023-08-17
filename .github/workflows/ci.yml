@@ -22,7 +22,10 @@ jobs:
           tar xf "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" hugo
           sudo mv hugo /usr/local/bin/
           git clone --depth=1 https://github.com/Calinou/godot-benchmarks.git --branch=add-web-interface
-          hugo --minify --source=godot-benchmarks/web --destination=public
+          # Copy benchmark JSONs to the web source so they can be included in the built website.
+          cp 2*.md godot-benchmarks/web/content
+          ls -l godot-benchmarks/web/content
+          hugo --minify --source=godot-benchmarks/web --destination="$PWD/public"
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
