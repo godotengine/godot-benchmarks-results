@@ -16,12 +16,11 @@ jobs:
       - name: Generate class reference table and build website
         env:
           HUGO_VERSION: '0.117.0'
-        # TODO: Use godotengine organization URL and master branch.
         run: |
           curl -LO "https://github.com/gohugoio/hugo/releases/download/v$HUGO_VERSION/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
           tar xf "hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" hugo
           sudo mv hugo /usr/local/bin/
-          git clone --depth=1 https://github.com/Calinou/godot-benchmarks.git --branch=add-web-interface
+          git clone --depth=1 https://github.com/godotengine/godot-benchmarks.git
           # Copy benchmark JSONs to the web source so they can be included in the built website.
           cp 2*.md godot-benchmarks/web/content
           ls -l godot-benchmarks/web/content
