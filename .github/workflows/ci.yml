@@ -22,8 +22,11 @@ jobs:
           sudo mv hugo /usr/local/bin/
           git clone --depth=1 https://github.com/godotengine/godot-benchmarks.git
           # Copy benchmark JSONs to the web source so they can be included in the built website.
-          cp 2*.md godot-benchmarks/web/content
+          cp 2*.md godot-benchmarks/web/src-data/benchmarks
           ls -l godot-benchmarks/web/content
+          cd ./godot-benchmarks/web
+          python3 generate-content.py
+          cd ../..
           hugo --minify --source=godot-benchmarks/web --destination="$PWD/public"
 
       - name: Deploy to GitHub Pages 🚀
